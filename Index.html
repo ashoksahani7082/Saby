@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saby Success Growth | Premium Meta & Google Ads Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3b82f6', 
+                        secondary: '#1e293b', 
+                        dark: '#0f172a', 
+                        accent: '#8b5cf6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            scrollbar-width: thin;
+            scrollbar-color: #3b82f6 #0f172a;
+            overflow-x: hidden;
+        }
+        
+        /* 3D Canvas Background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none; /* Allows clicking through the canvas */
+            will-change: transform; /* Hardware Acceleration for 60FPS */
+        }
+        #canvas-container canvas {
+            display: block;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 3s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Glassmorphism Classes for Ultra-Premium Look */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 1) !important;
+            box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.8), inset 0 0 20px rgba(59, 130, 246, 0.4) !important;
+        }
+
+        /* Dynamic Scroll Reveal Animations */
+        .reveal-up { opacity: 0; transform: translateY(50px); transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms), transform 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms); }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms), transform 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms); }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms), transform 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms); }
+        .reveal-scale { opacity: 0; transform: scale(0.8); transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms), transform 0.8s cubic-bezier(0.5, 0, 0, 1) var(--delay, 0ms); }
+        
+        .reveal-up.active, .reveal-left.active, .reveal-right.active, .reveal-scale.active {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* Floating Animation for Elements */
+        .float-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+        .float-anim-delay {
+            animation: floating 3s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Custom Animated Premium Button */
+        .btn-premium {
+            background: linear-gradient(#0f172a, #0f172a) padding-box,
+                        linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6) border-box;
+            border: 2px solid transparent;
+            border-radius: 9999px;
+            background-size: 200% auto;
+            animation: gradientMove 3s linear infinite;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 25px rgba(59,130,246,0.4);
+        }
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 40%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+        .btn-premium:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(139,92,246,0.6);
+        }
+        .arrow-bounce {
+            animation: arrowBounce 1.5s ease-in-out infinite;
+        }
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+
+        /* --- PREMIUM CUSTOM CURSOR --- */
+        @media (pointer: fine) { 
+            body, a, button, input, select, textarea {
+                cursor: none !important; 
+            }
+            #cursor-dot {
+                position: fixed;
+                top: 0; left: 0;
+                width: 6px; height: 6px;
+                background-color: white;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9999999; 
+                mix-blend-mode: difference; 
+                transition: width 0.1s, height 0.1s;
+            }
+            #cursor-ring {
+                position: fixed;
+                top: 0; left: 0;
+                width: 40px; height: 40px;
+                border: 1px solid rgba(59, 130, 246, 0.6);
+                background: rgba(59, 130, 246, 0.05);
+                backdrop-filter: blur(3px);
+                -webkit-backdrop-filter: blur(3px);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9999998; 
+                box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+                transition: width 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                            height 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                            background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+                will-change: transform;
+            }
+            #cursor-ring.hovered {
+                width: 70px;
+                height: 70px;
+                background: rgba(139, 92, 246, 0.15); 
+                border-color: rgba(139, 92, 246, 0.8);
+                box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+            }
+            #cursor-ring.clicked {
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            
+            /* --- FLASH LIGHT TRAIL --- */
+            .cursor-trail {
+                position: fixed;
+                top: 0; left: 0;
+                width: 8px; height: 8px;
+                border-radius: 50%;
+                background: #3b82f6;
+                box-shadow: 0 0 10px #3b82f6, 0 0 20px #8b5cf6;
+                pointer-events: none;
+                z-index: 9999997; 
+                mix-blend-mode: screen;
+                will-change: transform, opacity;
+                transition: opacity 0.5s ease;
+            }
+        }
+
+        /* --- 8K DYNAMIC PRELOADER --- */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #020617; 
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, transform 1s cubic-bezier(0.8, 0, 0.2, 1), filter 0.6s ease;
+            overflow: hidden;
+        }
+        #preloader::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(59,130,246,0.15) 0%, transparent 60%);
+            animation: pulseBg 2s ease-in-out infinite alternate;
+        }
+        @keyframes pulseBg { 0% { opacity: 0.4; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.1); } }
+
+        #preloader.loaded {
+            opacity: 0;
+            pointer-events: none; 
+            transform: scale(1.1); 
+            filter: blur(30px);
+        }
+        
+        /* 8K Glowing Orb Structure */
+        .loader-orb {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 20px rgba(59,130,246,0.4));
+        }
+        .orb-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid transparent;
+        }
+        /* Outer HDR Ring */
+        .orb-ring:nth-child(1) { 
+            border-top: 3px solid #3b82f6; border-right: 3px solid rgba(59, 130, 246, 0.1); 
+            animation: spinOrb 1s linear infinite; 
+            box-shadow: 0 0 15px #3b82f6 inset, 0 0 15px #3b82f6; 
+        }
+        /* Middle HDR Ring */
+        .orb-ring:nth-child(2) { 
+            inset: 15px; border-bottom: 3px solid #8b5cf6; border-left: 3px solid rgba(139, 92, 246, 0.1); 
+            animation: spinOrbReverse 1.5s linear infinite; 
+            box-shadow: 0 0 15px #8b5cf6 inset, 0 0 15px #8b5cf6; 
+        }
+        /* Inner Fast Ring */
+        .orb-ring:nth-child(3) { 
+            inset: 30px; border-top: 3px solid #ffffff; border-bottom: 3px solid #ffffff; 
+            animation: spinOrb 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; 
+            opacity: 0.5;
+        }
+        
+        .orb-core {
+            width: 50px; height: 50px;
+            background: radial-gradient(circle, #ffffff 0%, #3b82f6 40%, #8b5cf6 100%);
+            border-radius: 50%;
+            animation: pulseCore 1s infinite alternate;
+            box-shadow: 0 0 30px #ffffff, 0 0 60px #3b82f6, 0 0 100px #8b5cf6; 
+        }
+
+        @keyframes spinOrb { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spinOrbReverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(-360deg); } }
+        @keyframes pulseCore { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.2); opacity: 1; filter: brightness(1.5); } }
+
+        .loader-brand {
+            margin-top: 50px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #3b82f6, #8b5cf6, #ffffff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 2s linear infinite;
+            z-index: 10;
+        }
+        
+        .loader-progress-wrap {
+            margin-top: 30px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+        .loader-bar-bg {
+            width: 100%; height: 3px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+        }
+        .loader-bar-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ffffff);
+            box-shadow: 0 0 15px #3b82f6, 0 0 30px #8b5cf6;
+            border-radius: 3px;
+        }
+        .loader-percentage {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 600;
+            letter-spacing: 4px;
+            font-variant-numeric: tabular-nums;
+        }
+        .loader-percentage span {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* Form slider styling overrides */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 0 10px #3b82f6;
+            transition: transform 0.1s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-primary selection:text-white">
+
+    <!-- WORLD CLASS 8K PRELOADER -->
+    <div id="preloader">
+        <div class="loader-orb">
+            <div class="orb-ring"></div>
+            <div class="orb-ring"></div>
+            <div class="orb-ring"></div>
+            <div class="orb-core"></div>
+        </div>
+        <div class="loader-brand">Saby Success Growth</div>
+        <div class="loader-progress-wrap">
+            <div class="loader-bar-bg">
+                <div class="loader-bar-fill" id="loader-bar-fill"></div>
+            </div>
+            <div class="loader-percentage"><span id="loader-percentage-text">0</span>% SYSTEM INIT</div>
+        </div>
+    </div>
+
+    <!-- Premium Custom Cursor Elements -->
+    <div id="cursor-dot" class="hidden md:block"></div>
+    <div id="cursor-ring" class="hidden md:block"></div>
+
+    <!-- 3D Background Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Navbar (Glassmorphism) -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer group" onclick="scrollToSection('home')">
+                    <i class="fa-solid fa-meteor text-primary text-2xl group-hover:rotate-12 transition-transform"></i>
+                    <span class="font-bold text-xl md:text-2xl tracking-tight text-white">Saby Success<span class="text-primary"> Growth</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-primary transition-colors px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#about" class="hover:text-primary transition-colors px-3 py-2 text-sm font-medium">About</a>
+                        <a href="#services" class="hover:text-primary transition-colors px-3 py-2 text-sm font-medium">Services</a>
+                        <a href="#calculator" class="hover:text-primary transition-colors px-3 py-2 text-sm font-medium">ROI Calculator</a>
+                        <a href="#contact" class="hover:text-primary transition-colors px-3 py-2 text-sm font-medium">Connect</a>
+                        <button onclick="openWaModal()" class="relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-medium text-white bg-primary rounded-full group shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)] transition-all">
+                            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                            <span class="relative flex items-center"><i class="fa-brands fa-whatsapp mr-2 text-green-400 group-hover:text-white transition-colors text-lg"></i>Let's Connect</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none" aria-label="Toggle menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <a href="#home" class="block hover:bg-white/10 text-white px-3 py-2 rounded-lg text-base font-medium" onclick="toggleMobileMenu()">Home</a>
+                <a href="#about" class="block hover:bg-white/10 text-white px-3 py-2 rounded-lg text-base font-medium" onclick="toggleMobileMenu()">About</a>
+                <a href="#services" class="block hover:bg-white/10 text-white px-3 py-2 rounded-lg text-base font-medium" onclick="toggleMobileMenu()">Services</a>
+                <a href="#calculator" class="block hover:bg-white/10 text-white px-3 py-2 rounded-lg text-base font-medium" onclick="toggleMobileMenu()">ROI Calculator</a>
+                <a href="#contact" class="block hover:bg-white/10 text-white px-3 py-2 rounded-lg text-base font-medium" onclick="toggleMobileMenu()">Connect</a>
+                <button onclick="openWaModal(); toggleMobileMenu();" class="w-full text-left text-primary font-bold px-3 py-2 text-base flex items-center"><i class="fa-brands fa-whatsapp mr-2 text-green-400 text-lg"></i>Let's Connect</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-24 pb-12 lg:pt-56 lg:pb-32 overflow-hidden min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center z-10 w-full">
+            <div class="reveal-up inline-flex items-center gap-2 px-4 py-1.5 lg:px-5 lg:py-2 rounded-full glass-panel border-white/10 text-xs lg:text-sm font-medium text-blue-400 mb-6 mx-auto backdrop-blur-xl">
+                <span class="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_#3b82f6]"></span>
+                World's No.1 Premium Ad Strategy
+            </div>
+            <h1 class="reveal-up text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight mb-4 lg:mb-6 leading-tight drop-shadow-2xl" style="--delay: 100ms;">
+                Scale your brand with <br class="hidden md:block" />
+                <span class="gradient-text">dynamic data.</span>
+            </h1>
+            <p class="reveal-up mt-4 max-w-2xl mx-auto text-lg lg:text-xl text-slate-300 mb-8 lg:mb-12 font-light px-2" style="--delay: 200ms;">
+                Stop guessing with your ad budget. Partner with an elite agency that has proven experience in delivering unprecedented ROI.
+            </p>
+            <div class="reveal-up flex flex-col sm:flex-row justify-center gap-4 lg:gap-6" style="--delay: 300ms;">
+                <button onclick="openWaModal()" class="btn-premium inline-flex items-center justify-center px-8 py-4 lg:px-10 lg:py-5 font-extrabold text-white text-lg lg:text-xl tracking-wide group z-10">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fa-brands fa-whatsapp mr-2 lg:mr-3 text-green-400 group-hover:text-white transition-colors text-xl lg:text-2xl"></i>
+                        WhatsApp Us 
+                        <i class="fa-solid fa-arrow-right ml-2 lg:ml-3 arrow-bounce text-blue-400 group-hover:text-white transition-colors"></i>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Stats Row -->
+            <div id="stats-section" class="mt-12 lg:mt-24 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 max-w-4xl mx-auto">
+                <div class="glass-card p-6 rounded-2xl reveal-up" style="--delay: 400ms;">
+                    <h3 class="text-4xl lg:text-5xl font-bold text-white mb-2"><span class="stat-counter" data-target="7">0</span>+</h3>
+                    <p class="text-blue-400 font-medium">Years of Mastery</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl reveal-up" style="--delay: 500ms;">
+                    <h3 class="text-4xl lg:text-5xl font-bold text-white mb-2">₹<span class="stat-counter" data-target="15">0</span> Cr+</h3>
+                    <p class="text-purple-400 font-medium">Ad Spend Managed</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl reveal-up" style="--delay: 600ms;">
+                    <h3 class="text-4xl lg:text-5xl font-bold text-white mb-2"><span class="stat-counter" data-target="350">0</span>%+</h3>
+                    <p class="text-green-400 font-medium">Average ROAS Increase</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Marquee / Grid -->
+    <section class="py-12 border-t border-b border-white/5 bg-slate-900/30 backdrop-blur-sm relative z-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-xs uppercase tracking-widest text-slate-500 mb-8 font-semibold">Scaled brands on elite networks</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
+                <span class="text-xl font-bold text-slate-400 flex items-center gap-2"><i class="fa-brands fa-shopify text-green-500"></i> Shopify Scaling</span>
+                <span class="text-xl font-bold text-slate-400 flex items-center gap-2"><i class="fa-brands fa-meta text-blue-500"></i> Meta Verified</span>
+                <span class="text-xl font-bold text-slate-400 flex items-center gap-2"><i class="fa-brands fa-google text-red-400"></i> Google Premier</span>
+                <span class="text-xl font-bold text-slate-400 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-purple-400"></i> Advanced Analytics</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0 reveal-left">
+                    <div class="relative rounded-3xl overflow-hidden glass-panel p-2 shadow-2xl border border-white/10 group float-anim">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="bg-slate-900/60 h-[450px] w-full rounded-2xl flex flex-col items-center justify-center relative overflow-hidden backdrop-blur-md">
+                            <!-- Animated Data Rings inside the image placeholder -->
+                            <div class="absolute w-64 h-64 border border-blue-500/30 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                            <div class="absolute w-48 h-48 border border-purple-500/40 rounded-full animate-[spin_7s_linear_infinite_reverse]"></div>
+                            
+                            <i class="fa-solid fa-chart-line text-7xl text-blue-400 mb-6 drop-shadow-[0_0_20px_rgba(59,130,246,0.8)] z-10 float-anim-delay"></i>
+                            <h3 class="text-3xl font-bold text-white z-10">Experience. Data. Results.</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <h2 class="text-primary font-semibold tracking-widest uppercase text-sm mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-yellow-400"></i> About Saby Success Growth
+                    </h2>
+                    <h3 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Elite Performance Agency.</h3>
+                    <p class="text-slate-300 text-lg mb-6 leading-relaxed font-light">
+                        In the world of digital marketing, guesswork doesn't work; data and experience do. At Saby Success Growth, we have decoded every market trend over the past 7+ years. 
+                    </p>
+                    <p class="text-slate-300 text-lg mb-10 leading-relaxed font-light">
+                        We have successfully managed over <strong>₹15 Crore+</strong> in ad spend to date. Our focus is not just driving clicks, but generating high-ticket conversions for your brand.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-4 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="mt-1 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-bullseye text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Laser Targeting</h4>
+                                <p class="text-sm text-slate-400 mt-1">Reaching the absolute exact audience.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-4 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="mt-1 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-rocket text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Rapid Scaling</h4>
+                                <p class="text-sm text-slate-400 mt-1">Tested & proven growth blueprints.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-up">
+                <h2 class="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Our Arsenal</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-white mb-6">Platform Supremacy</h3>
+                <p class="text-slate-300 text-lg font-light">We dominate the platforms that control the world's most significant digital traffic.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Meta Ads -->
+                <div class="glass-card p-10 rounded-3xl group reveal-scale relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-500/40 transition-colors duration-500"></div>
+                    <div class="w-20 h-20 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300 backdrop-blur-md float-anim">
+                        <i class="fa-brands fa-meta text-5xl bg-gradient-to-tr from-[#0668E1] to-[#D138B6] bg-clip-text text-transparent inline-block"></i>
+                    </div>
+                    <h4 class="text-3xl font-bold text-white mb-4">Meta Ecosystem</h4>
+                    <p class="text-slate-300 mb-8 font-light text-lg">
+                        Facebook & Instagram domination. Through advanced AI targeting and creative hooks, we engineer viral growth for your brand.
+                    </p>
+                    <ul class="space-y-4 text-slate-300 font-medium mb-8">
+                        <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-check text-primary text-xs"></i></span> High-RoAS E-commerce</li>
+                        <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-check text-primary text-xs"></i></span> Premium Lead Generation</li>
+                        <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-check text-primary text-xs"></i></span> Advanced Pixel Retargeting</li>
+                    </ul>
+                    <button onclick="openWaModal('Meta Scaling Strategy')" class="w-full py-4 rounded-xl border border-blue-500/30 text-white font-bold hover:bg-blue-500 hover:border-blue-500 transition-all shadow-[inset_0_0_0_transparent] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">Consult Meta Strategy</button>
+                </div>
+
+                <!-- Google Ads -->
+                <div class="glass-card p-10 rounded-3xl group reveal-scale relative overflow-hidden" style="--delay: 150ms;">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-red-500/20 rounded-full blur-3xl group-hover:bg-red-500/40 transition-colors duration-500"></div>
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-800 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-red-500/30 group-hover:scale-110 transition-transform duration-300 float-anim-delay">
+                        <i class="fa-brands fa-google text-4xl text-white"></i>
+                    </div>
+                    <h4 class="text-3xl font-bold text-white mb-4">Google Search Network</h4>
+                    <p class="text-slate-300 mb-8 font-light text-lg">
+                        Capture high-intent traffic directly from the world's biggest search engine. Target the exact customers who are actively looking for you.
+                    </p>
+                    <ul class="space-y-4 text-slate-300 font-medium mb-8">
+                        <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center"><i class="fa-solid fa-check text-red-500 text-xs"></i></span> Search & Display Campaigns</li>
+                        <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center"><i class="fa-solid fa-check text-red-500 text-xs"></i></span> Performance Max & YouTube</li>
+                        <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center"><i class="fa-solid fa-check text-red-500 text-xs"></i></span> Competitor Keyword Hijacking</li>
+                    </ul>
+                    <button onclick="openWaModal('Google Search Strategy')" class="w-full py-4 rounded-xl border border-red-500/30 text-white font-bold hover:bg-red-500 hover:border-red-500 transition-all shadow-[inset_0_0_0_transparent] hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]">Consult Google Strategy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive ROAS Calculator Section -->
+    <section id="calculator" class="py-24 relative z-10 overflow-hidden bg-slate-900/40 border-y border-white/5 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-up">
+                <h2 class="text-primary font-semibold tracking-widest uppercase text-sm mb-3">ROI Estimation Engine</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-white mb-6">Calculate Your Potential</h3>
+                <p class="text-slate-300 text-lg font-light">Estimate dynamic revenue generation and target metric milestones based on optimized Saby Success Growth ad spend formulas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Interactive Controls -->
+                <div class="glass-panel p-8 rounded-3xl border border-white/10 reveal-left">
+                    <h4 class="text-2xl font-bold text-white mb-6">Simulation Controls</h4>
+                    
+                    <!-- Monthly Spend -->
+                    <div class="mb-8">
+                        <div class="flex justify-between text-sm font-semibold mb-3">
+                            <span class="text-slate-400">MONTHLY AD SPEND</span>
+                            <span class="text-primary">₹<span id="spend-val">5,00,000</span></span>
+                        </div>
+                        <input type="range" id="spend-slider" min="50000" max="5000000" step="50000" value="500000" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                            <span>₹50K</span>
+                            <span>₹50L</span>
+                        </div>
+                    </div>
+
+                    <!-- Current ROAS -->
+                    <div class="mb-8">
+                        <div class="flex justify-between text-sm font-semibold mb-3">
+                            <span class="text-slate-400">CURRENT ROAS (X)</span>
+                            <span class="text-accent"><span id="current-roas-val">1.5</span>x</span>
+                        </div>
+                        <input type="range" id="current-roas-slider" min="0.5" max="5" step="0.1" value="1.5" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                            <span>0.5x</span>
+                            <span>5.0x</span>
+                        </div>
+                    </div>
+
+                    <!-- Target Optimized ROAS -->
+                    <div class="mb-8">
+                        <div class="flex justify-between text-sm font-semibold mb-3">
+                            <span class="text-slate-400">SUHA OPTIMIZED ROAS</span>
+                            <span class="text-green-400"><span id="target-roas-val">3.5</span>x</span>
+                        </div>
+                        <input type="range" id="target-roas-slider" min="1.5" max="10" step="0.1" value="3.5" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                            <span>1.5x</span>
+                            <span>10.0x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Projection Results -->
+                <div class="reveal-right">
+                    <div class="glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden bg-gradient-to-b from-slate-900/60 to-slate-950/80">
+                        <div class="absolute top-0 right-0 p-6 opacity-10">
+                            <i class="fa-solid fa-chart-line text-9xl text-green-400"></i>
+                        </div>
+                        
+                        <h4 class="text-xl font-bold text-white mb-6 tracking-wide">Projected Performance Shift</h4>
+
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                            <div class="border-r border-white/5 pr-4">
+                                <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Current Revenue</span>
+                                <h5 class="text-xl font-bold text-slate-400 mt-1">₹<span id="current-rev">7.5L</span></h5>
+                            </div>
+                            <div class="pl-4">
+                                <span class="text-[10px] uppercase font-bold text-green-400 tracking-wider">Optimized Revenue</span>
+                                <h5 class="text-3xl font-black text-white mt-1 text-green-400">₹<span id="target-rev">17.5L</span></h5>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-white/5 pt-6 mb-8">
+                            <span class="text-xs uppercase font-semibold text-slate-400 tracking-wider">Net Monthly Growth Yield</span>
+                            <h5 class="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mt-2">+₹<span id="rev-diff">10,00,000</span></h5>
+                            <p class="text-xs text-slate-400 mt-2">Additional revenue potential unlocked with systematic AI scaling pipelines.</p>
+                        </div>
+
+                        <button onclick="requestRoasProposal()" class="w-full btn-premium py-4 text-white font-extrabold tracking-wider text-center">CLAIM THIS BLUEPRINT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scale Blueprint Timeline (Why Choose Us) -->
+    <section class="py-24 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-up">
+                <h2 class="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Our Protocol</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-white mb-6">How We Scale Your Brand</h3>
+                <p class="text-slate-300 text-lg font-light">Custom blueprint planning to structured validation loop in 3 precise, high-velocity phases.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="glass-card p-8 rounded-3xl border border-white/5 reveal-up" style="--delay: 100ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-primary flex items-center justify-center font-bold text-xl mb-6 shadow-[0_0_15px_rgba(59,130,246,0.2)]">01</div>
+                    <h4 class="text-2xl font-bold text-white mb-4">Pixel Auditing</h4>
+                    <p class="text-slate-300 font-light">
+                        We scan, fix, and optimize your analytics profile, past conversions, pixel setup, and backend data discrepancies to establish clean tracking paths.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card p-8 rounded-3xl border border-white/5 reveal-up" style="--delay: 200ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xl mb-6 shadow-[0_0_15px_rgba(139,92,246,0.2)]">02</div>
+                    <h4 class="text-2xl font-bold text-white mb-4">Creative Hooking</h4>
+                    <p class="text-slate-300 font-light">
+                        Meta & Google networks have advanced, but creative hooks remain the final driver. We deploy optimized static banners and high-retention video systems.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card p-8 rounded-3xl border border-white/5 reveal-up" style="--delay: 300ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-green-500/20 text-green-400 flex items-center justify-center font-bold text-xl mb-6 shadow-[0_0_15px_rgba(34,197,94,0.2)]">03</div>
+                    <h4 class="text-2xl font-bold text-white mb-4">Pacing & Scale</h4>
+                    <p class="text-slate-300 font-light">
+                        Once high RoAS parameters are locked, we gradually step up the spend budget linearly with clear risk-adjusted pacing strategies to keep the CAC stable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="py-32 relative z-10 overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 relative z-10 text-center reveal-scale">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight drop-shadow-xl">Ignite Your Revenue.</h2>
+            <p class="text-xl text-slate-300 mb-12 font-light">
+                A 15-minute call and your brand's custom blueprint is ready. No fluff, just pure scaling strategy.
+            </p>
+            <div class="glass-panel p-10 md:p-12 rounded-3xl border border-white/20 shadow-[0_0_50px_rgba(0,0,0,0.5)] max-w-lg mx-auto relative overflow-hidden float-anim">
+                <!-- Decorative glow inside form -->
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-primary/30 rounded-full blur-[50px]"></div>
+                <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-accent/30 rounded-full blur-[50px]"></div>
+                
+                <form class="relative z-10" id="contactForm" onsubmit="handleFormSubmission(event)">
+                    <div class="mb-5 text-left">
+                        <label class="block text-xs font-semibold tracking-wide uppercase text-slate-400 mb-2">Full Name</label>
+                        <input type="text" id="contactName" class="w-full bg-slate-900/50 border border-white/5 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all placeholder-white/20 text-base sm:text-sm" placeholder="John Doe" required>
+                    </div>
+                    <div class="mb-5 text-left">
+                        <label class="block text-xs font-semibold tracking-wide uppercase text-slate-400 mb-2">Business Email / Phone</label>
+                        <input type="text" id="contactInfo" class="w-full bg-slate-900/50 border border-white/5 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all placeholder-white/20 text-base sm:text-sm" placeholder="contact@brand.com" required>
+                    </div>
+                    <div class="mb-8 text-left">
+                        <label class="block text-xs font-semibold tracking-wide uppercase text-slate-400 mb-2">Website URL</label>
+                        <input type="text" id="contactUrl" class="w-full bg-slate-900/50 border border-white/5 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all placeholder-white/20 text-base sm:text-sm" placeholder="yourbrand.com" required>
+                    </div>
+                    <button type="submit" class="w-full btn-premium py-4 lg:py-5 font-bold text-white text-lg tracking-wide shadow-xl">
+                        Request Scale Strategy
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 relative z-10 bg-slate-950/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16">
+                <!-- Branding Block -->
+                <div class="md:col-span-4 flex flex-col justify-start gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-meteor text-primary text-2xl"></i>
+                        <span class="font-bold text-2xl tracking-tight text-white">Saby Success<span class="text-primary"> Growth</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed font-light mt-2">
+                        We deploy state-of-the-art predictive performance frameworks and targeted hyper-scalable Meta & Google campaigns to unlock elite ROI metrics for your commercial ecosystem.
+                    </p>
+                </div>
+
+                <!-- Navigation Quick Links -->
+                <div class="md:col-span-3">
+                    <h4 class="text-xs uppercase tracking-widest font-semibold text-white mb-6">Explore Directory</h4>
+                    <div class="flex flex-col gap-4 text-sm font-medium">
+                        <a href="#home" class="text-slate-400 hover:text-white transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] text-primary mr-2"></i> Home Gateway</a>
+                        <a href="#about" class="text-slate-400 hover:text-white transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] text-primary mr-2"></i> Corporate Identity</a>
+                        <a href="#services" class="text-slate-400 hover:text-white transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] text-primary mr-2"></i> Strategic Services</a>
+                        <a href="#calculator" class="text-slate-400 hover:text-white transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] text-primary mr-2"></i> Live ROI Simulator</a>
+                    </div>
+                </div>
+
+                <!-- Physical Address Block from image_6741da.png -->
+                <div class="md:col-span-5">
+                    <h4 class="text-xs uppercase tracking-widest font-semibold text-white mb-6">Registered Office & Contact</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 w-5 h-5 rounded bg-primary/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot text-primary text-xs"></i></span>
+                            <span class="leading-relaxed">
+                                <strong>Flat No:</strong> 805, BHAVYA CLASSIC,<br>
+                                <strong>Block:</strong> A, MIYAPUR,<br>
+                                <strong>Town/District:</strong> MIYAPUR, HYDERABAD, TELANGANA - 500049
+                            </span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-phone text-primary text-xs"></i></span>
+                            <a href="tel:9236327410" class="hover:text-white transition-colors">+91 9236327410</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope text-primary text-xs"></i></span>
+                            <a href="mailto:sabyofficial2124@gmail.com" class="hover:text-white transition-colors">sabyofficial2124@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom License Copyright -->
+            <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+                <p class="text-xs text-slate-500">© 2026 Saby Success Growth. All Rights Reserved. Engineered for Ultra-High Performance Campaigns.</p>
+                <div class="flex items-center gap-4">
+                    <button onclick="openWaModal()" class="text-xs font-bold text-green-400 hover:text-green-300 transition-colors flex items-center gap-1">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Live Priority Dispatch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Modal Popup Interface -->
+    <div id="waModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[999999] hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-8 border border-white/10 relative overflow-hidden animate-[floating_4s_ease-in-out_infinite]">
+            <button onclick="closeWaModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors" aria-label="Close modal">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-white">Let's Connect Live</h3>
+                <p class="text-sm text-slate-400 mt-2">Submit your basic details to start a priority chat with a lead ads executive directly on WhatsApp.</p>
+            </div>
+            <form onsubmit="redirectToWhatsApp(event)">
+                <input type="hidden" id="wa-preset-context" value="General Strategy Consultation">
+                <div class="mb-4">
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">FULL NAME</label>
+                    <input type="text" id="waName" class="w-full bg-slate-900/50 border border-white/5 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-all placeholder-white/20 text-base sm:text-sm" placeholder="Your name" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-xs font-semibold text-slate-400 mb-2">WEBSITE / BRAND NAME</label>
+                    <input type="text" id="waBrand" class="w-full bg-slate-900/50 border border-white/5 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-all placeholder-white/20 text-base sm:text-sm" placeholder="e.g. brandname.com" required>
+                </div>
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 font-extrabold text-white py-4 rounded-xl transition-all shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)] flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> START CHAT NOW
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Live Premium Notification Box -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-[999999] glass-panel border-green-500/40 p-4 rounded-2xl hidden flex items-center gap-3 shadow-[0_0_30px_rgba(0,0,0,0.5)] max-w-sm">
+        <div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <h5 class="text-sm font-bold text-white">Request Submitted!</h5>
+            <p class="text-xs text-slate-400 mt-0.5" id="toastMsg">Initializing chat gateway redirection protocol.</p>
+        </div>
+    </div>
+
+    <!-- Core Interactive Client-Side Scripting Blocks -->
+    <script>
+        let scene, camera, renderer, starParticles, connectionsLine;
+        const particleCount = 120;
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
+        const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+
+        function init3DBackground() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 40;
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Generate particles
+            const particleGeometry = new THREE.BufferGeometry();
+            
+            // Programmatically draw a smooth glowing circle texture to avoid external asset dependency
+            const canvas = document.createElement('canvas');
+            canvas.width = 16;
+            canvas.height = 16;
+            const ctx = canvas.getContext('2d');
+            const grad = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
+            grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+            grad.addColorStop(0.3, 'rgba(59, 130, 246, 0.8)');
+            grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 16, 16);
+            
+            const texture = new THREE.CanvasTexture(canvas);
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 1.8,
+                map: texture,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            for (let i = 0; i < particleCount; i++) {
+                // Pos coordinates
+                positions[i * 3] = (Math.random() - 0.5) * 80;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+
+                // Velocities
+                velocities.push({
+                    x: (Math.random() - 0.5) * 0.05,
+                    y: (Math.random() - 0.5) * 0.05,
+                    z: (Math.random() - 0.5) * 0.05
+                });
+            }
+
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            starParticles = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(starParticles);
+
+            // Lines connect system setup
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0x3b82f6,
+                transparent: true,
+                opacity: 0.05
+            });
+            const lineGeometry = new THREE.BufferGeometry();
+            connectionsLine = new THREE.LineSegments(lineGeometry, lineMaterial);
+            scene.add(connectionsLine);
+
+            window.addEventListener('resize', onWindowResize);
+            window.addEventListener('mousemove', onMouseMove);
+        }
+
+        function onMouseMove(e) {
+            // Normalize mouse coords
+            mouse.targetX = (e.clientX / window.innerWidth - 0.5) * 4;
+            mouse.targetY = -(e.clientY / window.innerHeight - 0.5) * 4;
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+
+            // Lerp mouse coordinates
+            mouse.x += (mouse.targetX - mouse.x) * 0.05;
+            mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+            // Parallax shift based on cursor
+            scene.rotation.y = mouse.x * 0.1;
+            scene.rotation.x = -mouse.y * 0.1;
+
+            const posArr = starParticles.geometry.attributes.position.array;
+            
+            // Limit line rendering complexity on mobile screens to preserve high FPS 
+            const isMobile = window.innerWidth < 768;
+            const maxConnectDist = isMobile ? 8 : 14;
+            const linePositions = [];
+
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                
+                // Add velocity vectors
+                posArr[i3] += velocities[i].x;
+                posArr[i3 + 1] += velocities[i].y;
+                posArr[i3 + 2] += velocities[i].z;
+
+                // Boundaries constraint wrapping
+                if (posArr[i3] < -40 || posArr[i3] > 40) velocities[i].x *= -1;
+                if (posArr[i3 + 1] < -40 || posArr[i3 + 1] > 40) velocities[i].y *= -1;
+                if (posArr[i3 + 2] < -40 || posArr[i3 + 2] > 40) velocities[i].z *= -1;
+
+                // Connect logic line calculation
+                if (!isMobile) {
+                    for (let j = i + 1; j < particleCount; j++) {
+                        const j3 = j * 3;
+                        const dx = posArr[i3] - posArr[j3];
+                        const dy = posArr[i3 + 1] - posArr[j3 + 1];
+                        const dz = posArr[i3 + 2] - posArr[j3 + 2];
+                        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                        if (dist < maxConnectDist) {
+                            linePositions.push(posArr[i3], posArr[i3 + 1], posArr[i3 + 2]);
+                            linePositions.push(posArr[j3], posArr[j3 + 1], posArr[j3 + 2]);
+                        }
+                    }
+                }
+            }
+
+            starParticles.geometry.attributes.position.needsUpdate = true;
+
+            if (!isMobile && linePositions.length > 0) {
+                connectionsLine.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+                connectionsLine.geometry.attributes.position.needsUpdate = true;
+                connectionsLine.visible = true;
+            } else {
+                connectionsLine.visible = false;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        let cursorX = 0, cursorY = 0;
+        let ringX = 0, ringY = 0;
+        const trailElements = [];
+        const maxTrails = 6;
+
+        function initCustomCursor() {
+            // Disable heavy cursor effects on touch devices to improve performance & prevent bugs
+            const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+            
+            if (!cursorDot || !cursorRing || isTouchDevice) {
+                if(cursorDot) cursorDot.style.display = 'none';
+                if(cursorRing) cursorRing.style.display = 'none';
+                return;
+            }
+
+            // Generate physical elements for visual trailing neon dots
+            for (let i = 0; i < maxTrails; i++) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.opacity = (1 - (i / maxTrails)) * 0.6;
+                document.body.appendChild(trail);
+                trailElements.push({ el: trail, x: 0, y: 0 });
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                cursorDot.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+            });
+
+            window.addEventListener('mousedown', () => cursorRing.classList.add('clicked'));
+            window.addEventListener('mouseup', () => cursorRing.classList.remove('clicked'));
+
+            // Hover checks on clickables to augment the pointer scale
+            const hoverables = document.querySelectorAll('a, button, input, select, textarea, .cursor-pointer');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorRing.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovered'));
+            });
+
+            animateCursor();
+        }
+
+        function animateCursor() {
+            // Fluent interpolation for lagging circle
+            ringX += (cursorX - ringX) * 0.15;
+            ringY += (cursorY - ringY) * 0.15;
+            cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+            // Neon light trail cascade path logic
+            let prevX = cursorX;
+            let prevY = cursorY;
+            
+            trailElements.forEach((trail, index) => {
+                trail.x += (prevX - trail.x) * 0.35;
+                trail.y += (prevY - trail.y) * 0.35;
+                trail.el.style.transform = `translate3d(${trail.x}px, ${trail.y}px, 0) translate(-50%, -50%) scale(${1 - (index / maxTrails)})`;
+                
+                prevX = trail.x;
+                prevY = trail.y;
+            });
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        const loaderBar = document.getElementById('loader-bar-fill');
+        const loaderText = document.getElementById('loader-percentage-text');
+        const preloader = document.getElementById('preloader');
+
+        function initPreloader() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 8) + 2;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(dismissPreloader, 400);
+                }
+                if (loaderBar) loaderBar.style.width = `${progress}%`;
+                if (loaderText) loaderText.textContent = progress;
+            }, 50);
+        }
+
+        function dismissPreloader() {
+            if (preloader) {
+                preloader.classList.add('loaded');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 1000);
+            }
+        }
+
+        function initScrollAnimations() {
+            const reveals = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale');
+            const observerOptions = {
+                root: null,
+                threshold: 0.15,
+                character: 'reveal-observe'
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional counter trigger when stats section shows up
+                        if (entry.target.id === 'stats-section') {
+                            triggerStatsCounter();
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            reveals.forEach(rev => revealObserver.observe(rev));
+        }
+
+        function triggerStatsCounter() {
+            const counters = document.querySelectorAll('.stat-counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let current = 0;
+                const speed = target > 50 ? 2 : 150; // Dynamic velocity depending on limits
+                const increment = Math.ceil(target / 40);
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = current;
+                    }
+                }, speed);
+            });
+        }
+
+        const spendSlider = document.getElementById('spend-slider');
+        const currentRoasSlider = document.getElementById('current-roas-slider');
+        const targetRoasSlider = document.getElementById('target-roas-slider');
+
+        const spendVal = document.getElementById('spend-val');
+        const currentRoasVal = document.getElementById('current-roas-val');
+        const targetRoasVal = document.getElementById('target-roas-val');
+
+        const currentRev = document.getElementById('current-rev');
+        const targetRev = document.getElementById('target-rev');
+        const revDiff = document.getElementById('rev-diff');
+
+        function initCalculator() {
+            if (!spendSlider) return;
+            
+            // Combined update action
+            const updateProjection = () => {
+                const spend = parseInt(spendSlider.value);
+                const curRoas = parseFloat(currentRoasSlider.value);
+                const tarRoas = parseFloat(targetRoasSlider.value);
+
+                // Live dynamic inputs feedback text
+                spendVal.textContent = spend.toLocaleString('en-IN');
+                currentRoasVal.textContent = curRoas.toFixed(1);
+                targetRoasVal.textContent = tarRoas.toFixed(1);
+
+                // Math projections
+                const currentRevenueResult = spend * curRoas;
+                const targetRevenueResult = spend * tarRoas;
+                const yieldDifference = targetRevenueResult - currentRevenueResult;
+
+                // Format numbers to Lakhs/Crores representations easily
+                const formatInScale = (num) => {
+                    if (num >= 10000000) {
+                        return (num / 10000000).toFixed(2) + ' Cr';
+                    } else if (num >= 100000) {
+                        return (num / 100000).toFixed(1) + ' Lakh';
+                    }
+                    return num.toLocaleString('en-IN');
+                };
+
+                currentRev.textContent = formatInScale(currentRevenueResult);
+                targetRev.textContent = formatInScale(targetRevenueResult);
+                revDiff.textContent = yieldDifference.toLocaleString('en-IN');
+            };
+
+            spendSlider.addEventListener('input', updateProjection);
+            currentRoasSlider.addEventListener('input', updateProjection);
+            targetRoasSlider.addEventListener('input', updateProjection);
+
+            // Execute load run
+            updateProjection();
+        }
+
+        function requestRoasProposal() {
+            const spend = parseInt(spendSlider.value);
+            const curRoas = parseFloat(currentRoasSlider.value);
+            const tarRoas = parseFloat(targetRoasSlider.value);
+            
+            const customQuery = `Meta scaling proposal with Monthly Spend: ₹${spend.toLocaleString('en-IN')}, Current ROAS: ${curRoas}x, Target ROAS Goal: ${tarRoas}x.`;
+            openWaModal(customQuery);
+        }
+
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Toggle Responsive Mobile Panel
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function toggleMobileMenu() {
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+        }
+
+        // Keep watch on scrolling to apply glass visual effect updates on top navbar
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-xl', 'bg-slate-950/85', 'border-b', 'border-white/5');
+            } else {
+                navbar.classList.remove('shadow-xl', 'bg-slate-950/85', 'border-b', 'border-white/5');
+            }
+        });
+
+        // Dynamic Modals handling
+        const waModal = document.getElementById('waModal');
+        const waContextInput = document.getElementById('wa-preset-context');
+
+        function openWaModal(contextPreset = 'General Scale Consultation Request') {
+            if (waModal) {
+                waModal.classList.remove('hidden');
+                if (waContextInput) waContextInput.value = contextPreset;
+            }
+        }
+
+        function closeWaModal() {
+            if (waModal) waModal.classList.add('hidden');
+        }
+
+        function scrollToSection(id) {
+            const target = document.getElementById(id);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Premium dynamic action messages trigger
+        function showNotification(text) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMsg');
+            if (toast) {
+                toastMsg.textContent = text;
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 4000);
+            }
+        }
+
+        // WhatsApp direct redirection build
+        function redirectToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('waName').value;
+            const brand = document.getElementById('waBrand').value;
+            const context = waContextInput ? waContextInput.value : 'Scale Strategy Review';
+            
+            // Format WhatsApp prefilled message
+            const baseText = `Hi Saby Success Growth Team,\n\nI want to discuss my growth strategy.\n\n*Name:* ${name}\n*Brand/Website:* ${brand}\n*Interested In:* ${context}\n\nPlease share your dynamic scaling blueprint. Thanks!`;
+            const encodedText = encodeURIComponent(baseText);
+            
+            // Build dynamic high converting link redirection
+            const waNumber = '919236327410'; // Connected to primary business number
+            const targetUrl = `https://wa.me/${waNumber}?text=${encodedText}`;
+
+            closeWaModal();
+            showNotification("Redirecting you to our secure scaling chat gateway...");
+            
+            setTimeout(() => {
+                window.open(targetUrl, '_blank');
+            }, 1200);
+        }
+
+        // Direct General Contact submission processing
+        function handleFormSubmission(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const info = document.getElementById('contactInfo').value;
+            const url = document.getElementById('contactUrl').value;
+
+            // Instantly transition and open WhatsApp modal with populated info details
+            const contextString = `Full Proposal Audit for Website: ${url}. Contact: ${info}.`;
+            openWaModal(contextString);
+            
+            // Prefill info inside modal as well
+            const waNameInput = document.getElementById('waName');
+            const waBrandInput = document.getElementById('waBrand');
+            if (waNameInput) waNameInput.value = name;
+            if (waBrandInput) waBrandInput.value = url;
+        }
+
+        // Initialize all premium structural elements dynamically
+        window.onload = function() {
+            initPreloader();
+            init3DBackground();
+            animate3D();
+            initCustomCursor();
+            initScrollAnimations();
+            initCalculator();
+        };
+    </script>
+</body>
+</html>
